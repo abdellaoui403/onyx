@@ -1,0 +1,91 @@
+<div class="page-about">
+  <div class="container">
+    <h1 class="page-title">{{ page.title }}</h1>
+    
+    <div class="about-content">
+      <div class="about-image">
+        <img src="{{ 'about-image.jpg' | asset_url }}" alt="About FITWEAR">
+      </div>
+      
+      <div class="about-text">
+        {{ page.content }}
+        
+        {% unless page.content != blank %}
+          <h2>Our Story</h2>
+          <p>FITWEAR was founded in 2020 with a simple mission: to provide high-quality fitness apparel that combines style, comfort, and functionality. We believe that when you look good, you feel good, and when you feel good, you perform better.</p>
+          
+          <p>Our team of designers and fitness enthusiasts work together to create apparel that not only looks great but also enhances your workout experience. We use premium materials and innovative technologies to ensure our products stand up to the toughest workouts.</p>
+          
+          <h2>Our Values</h2>
+          <ul>
+            <li><strong>Quality:</strong> We never compromise on quality. Every product undergoes rigorous testing to ensure it meets our high standards.</li>
+            <li><strong>Sustainability:</strong> We're committed to reducing our environmental impact by using eco-friendly materials and sustainable manufacturing processes.</li>
+            <li><strong>Community:</strong> We believe in building a community of like-minded individuals who are passionate about fitness and living a healthy lifestyle.</li>
+            <li><strong>Innovation:</strong> We're constantly innovating and improving our products to provide the best possible experience for our customers.</li>
+          </ul>
+          
+          <h2>Our Team</h2>
+          <p>Our team consists of fitness enthusiasts, professional athletes, and fashion designers who are passionate about creating the best fitness apparel on the market. We're united by our love for fitness and our commitment to helping others achieve their fitness goals.</p>
+        {% endunless %}
+      </div>
+    </div>
+    
+    <div class="team-section">
+      <h2 class="section-title">Meet Our Team</h2>
+      
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="team-member__image">
+            <img src="{{ 'team-1.jpg' | asset_url }}" alt="John Doe">
+          </div>
+          <h3 class="team-member__name">John Doe</h3>
+          <p class="team-member__role">Founder & CEO</p>
+          <p class="team-member__bio">John is a former professional athlete with a passion for fitness and fashion. He founded FITWEAR to combine his two passions.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="team-member__image">
+            <img src="{{ 'team-2.jpg' | asset_url }}" alt="Jane Smith">
+          </div>
+          <h3 class="team-member__name">Jane Smith</h3>
+          <p class="team-member__role">Head of Design</p>
+          <p class="team-member__bio">Jane has over 10 years of experience in fashion design. She leads our design team and ensures all our products are both stylish and functional.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="team-member__image">
+            <img src="{{ 'team-3.jpg' | asset_url }}" alt="Mike Johnson">
+          </div>
+          <h3 class="team-member__name">Mike Johnson</h3>
+          <p class="team-member__role">Fitness Director</p>
+          <p class="team-member__bio">Mike is a certified personal trainer and fitness coach. He tests all our products to ensure they meet the needs of fitness enthusiasts.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="team-member__image">
+            <img src="{{ 'team-4.jpg' | asset_url }}" alt="Sarah Williams">
+          </div>
+          <h3 class="team-member__name">Sarah Williams</h3>
+          <p class="team-member__role">Marketing Director</p>
+          <p class="team-member__bio">Sarah has a background in digital marketing and a passion for fitness. She leads our marketing efforts and community engagement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.page-about {
+  padding: 6rem 0;
+  background-color: var(--color-background);
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 4rem;
+  color: var(--color-text);
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;

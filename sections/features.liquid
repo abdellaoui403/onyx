@@ -1,0 +1,116 @@
+<section class="section section-features">
+  <div class="page-width">
+    <div class="features-grid">
+      {% for block in section.blocks %}
+        <div class="feature-item" {{ block.shopify_attributes }}>
+          <div class="feature-icon">
+            {% case block.settings.icon %}
+              {% when 'shield' %}
+                {% render 'icon-shield' %}
+              {% when 'truck' %}
+                {% render 'icon-truck' %}
+              {% when 'return' %}
+                {% render 'icon-return' %}
+              {% when 'support' %}
+                {% render 'icon-support' %}
+              {% else %}
+                {% render 'icon-' | append: block.settings.icon %}
+            {% endcase %}
+          </div>
+          <h3 class="feature-title">{{ block.settings.title | escape }}</h3>
+          <p class="feature-text">{{ block.settings.text | escape }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Features",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "support",
+              "label": "Support"
+            }
+          ],
+          "default": "shield",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "SECURE PAYMENT",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "All transactions are processed securely with end-to-end encryption",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "SECURE PAYMENT",
+            "text": "All transactions are processed securely with end-to-end encryption"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "FREE SHIPPING",
+            "text": "Free shipping on all orders over $100"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "return",
+            "title": "EASY RETURNS",
+            "text": "30-day money back guarantee on all products"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 SUPPORT",
+            "text": "Our customer service team is available around the clock"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

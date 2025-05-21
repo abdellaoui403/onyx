@@ -1,0 +1,94 @@
+<section class="section section-promo" style="background-color: {{ section.settings.background_color }}; background-image: url('{{ section.settings.background_image | img_url: '2000x' }}');">
+  <div class="page-width">
+    <div class="promo-content">
+      <h2 class="promo-title">
+        {{ section.settings.title | escape }}
+        {% if section.settings.subtitle != blank %}
+          <span class="promo-subtitle">{{ section.settings.subtitle | escape }}</span>
+        {% endif %}
+      </h2>
+      
+      {% if section.settings.text != blank %}
+        <div class="promo-text">{{ section.settings.text | escape }}</div>
+      {% endif %}
+      
+      <div class="promo-buttons">
+        {% if section.settings.button1_label != blank and section.settings.button1_link != blank %}
+          <a href="{{ section.settings.button1_link }}" class="button button-primary">
+            {{ section.settings.button1_label | escape }}
+          </a>
+        {% endif %}
+        
+        {% if section.settings.button2_label != blank and section.settings.button2_link != blank %}
+          <a href="{{ section.settings.button2_link }}" class="button button-secondary">
+            {{ section.settings.button2_label | escape }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promo Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#f8f8f8",
+      "label": "Background color"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "SUMMER SALE",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "default": "UP TO 50% OFF",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Limited time offer on our premium fitness collection. Upgrade your workout gear today and save big!",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button1_label",
+      "default": "SHOP MEN",
+      "label": "Button 1 label"
+    },
+    {
+      "type": "url",
+      "id": "button1_link",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "text",
+      "id": "button2_label",
+      "default": "SHOP WOMEN",
+      "label": "Button 2 label"
+    },
+    {
+      "type": "url",
+      "id": "button2_link",
+      "label": "Button 2 link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Banner"
+    }
+  ]
+}
+{% endschema %}

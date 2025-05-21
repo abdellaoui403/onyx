@@ -1,0 +1,102 @@
+<div class="fitness-programs">
+  <div class="container">
+    <div class="section-title">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    
+    <div class="row">
+      {% for block in section.blocks %}
+        <div class="col-md-6 col-lg-4">
+          <div class="program-card">
+            {% if block.settings.image != blank %}
+              <div class="program-card__image-wrapper">
+                <img 
+                  src="{{ block.settings.image | img_url: 'master' }}" 
+                  alt="{{ block.settings.title }}" 
+                  class="program-card__image"
+                  loading="lazy"
+                >
+              </div>
+            {% endif %}
+            
+            <div class="program-card__overlay">
+              <h3 class="program-card__title">{{ block.settings.title }}</h3>
+              <p class="program-card__description">{{ block.settings.description }}</p>
+              
+              {% if block.settings.button_text != blank and block.settings.button_url != blank %}
+                <a href="{{ block.settings.button_url }}" class="btn">{{ block.settings.button_text }}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Fitness Programs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Our Fitness Programs"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "program",
+      "name": "Program",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Program Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Program Title",
+          "default": "Strength Training"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Program Description",
+          "default": "Build muscle and increase strength with our comprehensive strength training program."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fitness Programs",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "program"
+        },
+        {
+          "type": "program"
+        },
+        {
+          "type": "program"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

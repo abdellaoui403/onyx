@@ -1,0 +1,239 @@
+<div class="collection-banner">
+  {% if collection.image %}
+    <img 
+      src="{{ collection.image | img_url: '2000x' }}" 
+      alt="{{ collection.title | escape }}" 
+      class="collection-banner__image"
+    >
+  {% else %}
+    <img 
+      src="{{ 'collection-banner.jpg' | asset_url }}" 
+      alt="{{ collection.title | escape }}" 
+      class="collection-banner__image"
+    >
+  {% endif %}
+  
+  <div class="collection-banner__overlay"></div>
+  
+  <div class="collection-banner__content">
+    <h1 class="collection-banner__title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="collection-banner__description">{{ collection.description }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="collection">
+  <div class="container">
+    <div class="collection__header">
+      <h2 class="collection__title">{{ collection.title }}</h2>
+      
+      <div class="collection__sort">
+        <label for="SortBy" class="collection__sort-label">Sort by:</label>
+        <select id="SortBy" class="collection__sort-select">
+          <option value="manual">Featured</option>
+          <option value="price-ascending">Price: Low to High</option>
+          <option value="price-descending">Price: High to Low</option>
+          <option value="title-ascending">Alphabetically: A-Z</option>
+          <option value="title-descending">Alphabetically: Z-A</option>
+          <option value="created-ascending">Date: Old to New</option>
+          <option value="created-descending">Date: New to Old</option>
+          <option value="best-selling">Best Selling</option>
+        </select>
+      </div>
+      
+      <button class="collection__filters-button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.5rem;">
+          <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Filters
+      </button>
+    </div>
+    
+    <div class="collection__content">
+      <div class="collection__filters">
+        {% if collection.all_tags.size > 0 %}
+          <div class="collection__filter">
+            <h3 class="collection__filter-title">Categories</h3>
+            <ul class="collection__filter-list">
+              {% for tag in collection.all_tags %}
+                <li class="collection__filter-item">
+                  <div class="collection__filter-checkbox">
+                    <input type="checkbox" id="filter-{{ tag | handle }}" {% if current_tags contains tag %}checked{% endif %}>
+                    <label for="filter-{{ tag | handle }}">{{ tag }}</label>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        
+        <div class="collection__filter">
+          <h3 class="collection__filter-title">Price Range</h3>
+          <div class="collection__filter-range">
+            <div class="collection__filter-price">
+              <input type="number" class="collection__filter-price-input" placeholder="Min">
+              <input type="number" class="collection__filter-price-input" placeholder="Max">
+            </div>
+            <input type="range" min="0" max="1000" value="500" class="collection__filter-slider">
+          </div>
+        </div>
+        
+        <div class="collection__filter">
+          <h3 class="collection__filter-title">Color</h3>
+          <ul class="collection__filter-list">
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-color-black">
+                <label for="filter-color-black">Black</label>
+              </div>
+            </li>
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-color-white">
+                <label for="filter-color-white">White</label>
+              </div>
+            </li>
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-color-red">
+                <label for="filter-color-red">Red</label>
+              </div>
+            </li>
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-color-blue">
+                <label for="filter-color-blue">Blue</label>
+              </div>
+            </li>
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-color-green">
+                <label for="filter-color-green">Green</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="collection__filter">
+          <h3 class="collection__filter-title">Size</h3>
+          <ul class="collection__filter-list">
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-size-s">
+                <label for="filter-size-s">S</label>
+              </div>
+            </li>
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-size-m">
+                <label for="filter-size-m">M</label>
+              </div>
+            </li>
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-size-l">
+                <label for="filter-size-l">L</label>
+              </div>
+            </li>
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-size-xl">
+                <label for="filter-size-xl">XL</label>
+              </div>
+            </li>
+            <li class="collection__filter-item">
+              <div class="collection__filter-checkbox">
+                <input type="checkbox" id="filter-size-xxl">
+                <label for="filter-size-xxl">XXL</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="collection__products">
+        {% for product in collection.products %}
+          <div class="product-card">
+            <a href="{{ product.url }}" class="product-card__link">
+              <div class="product-card__image-wrapper">
+                {% if product.featured_image != blank %}
+                  <img 
+                    src="{{ product.featured_image | img_url: 'medium' }}" 
+                    alt="{{ product.featured_image.alt | escape }}" 
+                    class="product-card__image"
+                    loading="lazy"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'product-card__image placeholder-svg' }}
+                {% endif %}
+                
+                {% if product.compare_at_price > product.price %}
+                  <div class="product-card__badge">Sale</div>
+                {% endif %}
+              </div>
+              
+              <div class="product-card__info">
+                <h3 class="product-card__title">{{ product.title }}</h3>
+                <div class="product-card__price">
+                  <span class="product-card__price-current">{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price %}
+                    <span class="product-card__price-compare">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                </div>
+              </div>
+            </a>
+            
+            <div class="product-card__actions">
+              <button class="product-card__action wishlist" aria-label="Add to wishlist">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="product-card__action quickview" aria-label="Quick view">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        {% else %}
+          <div style="grid-column: 1 / -1; text-align: center; padding: 5rem 0;">
+            <p>No products found in this collection</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    {% if paginate.pages > 1 %}
+      <div class="collection__pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="collection__pagination-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+        
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="collection__pagination-item">{{ part.title }}</a>
+          {% else %}
+            <span class="collection__pagination-item active">{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+        
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="collection__pagination-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

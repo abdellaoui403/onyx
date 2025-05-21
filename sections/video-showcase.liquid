@@ -1,0 +1,105 @@
+<section class="section section-video">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+      <div class="section-subtitle">{{ section.settings.subtitle | escape }}</div>
+    </div>
+    
+    <div class="video-container">
+      {% if section.settings.video_url != blank %}
+        <div class="video-wrapper" data-video-id="{{ section.settings.video_url | video_id }}">
+          <div class="video-poster" style="background-image: url('{% if section.settings.cover_image != blank %}{{ section.settings.cover_image | img_url: '1200x' }}{% else %}{{ section.settings.video_url | video_image_url }}{% endif %}');">
+            <button class="video-play-button" aria-label="Play video">
+              {% render 'icon-play' %}
+            </button>
+          </div>
+          <div class="video-element"></div>
+        </div>
+      {% else %}
+        <div class="video-placeholder">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          <button class="video-play-button" aria-label="Play video">
+            {% render 'icon-play' %}
+          </button>
+        </div>
+      {% endif %}
+      
+      {% if section.settings.overlay_title != blank or section.settings.overlay_text != blank or section.settings.button_label != blank %}
+        <div class="video-overlay">
+          {% if section.settings.overlay_title != blank %}
+            <h3 class="video-overlay-title">{{ section.settings.overlay_title | escape }}</h3>
+          {% endif %}
+          
+          {% if section.settings.overlay_text != blank %}
+            <p class="video-overlay-text">{{ section.settings.overlay_text | escape }}</p>
+          {% endif %}
+          
+          {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+            <a href="{{ section.settings.button_link }}" class="button button-primary">
+              {{ section.settings.button_label | escape }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Video Showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "PERFORMANCE IN ACTION",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "default": "See how our premium fitness apparel performs in real-world training scenarios.",
+      "label": "Subtitle"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube", "vimeo"],
+      "label": "Video URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover image"
+    },
+    {
+      "type": "text",
+      "id": "overlay_title",
+      "default": "TRAIN LIKE A CHAMPION",
+      "label": "Overlay title"
+    },
+    {
+      "type": "text",
+      "id": "overlay_text",
+      "default": "Our performance gear is designed to help you push your limits and achieve your fitness goals.",
+      "label": "Overlay text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "SHOP PERFORMANCE GEAR",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Showcase"
+    }
+  ]
+}
+{% endschema %}

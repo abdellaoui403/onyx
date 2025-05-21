@@ -1,0 +1,72 @@
+&lt;!doctype html>
+<html lang="{{ shop.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ff0000">
+  <link rel="canonical" href="{{ canonical_url }}">
+  
+  <title>{{ page_title }}</title>
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+  
+  {{ content_for_header }}
+  
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  
+  {% if settings.favicon != blank %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {% endif %}
+</head>
+
+<body class="template-{{ template.name | handle }}">
+  <div id="shopify-section-announcement-bar" class="shopify-section">
+    {% section 'announcement-bar' %}
+  </div>
+  
+  <div id="shopify-section-header" class="shopify-section">
+    {% section 'header' %}
+  </div>
+  
+  <main id="MainContent" class="content-for-layout" role="main">
+    {{ content_for_layout }}
+  </main>
+  
+  <div id="shopify-section-footer" class="shopify-section">
+    {% section 'footer' %}
+  </div>
+  
+  {% section 'popup' %}
+  
+  <div id="wishlist-popup" class="wishlist-popup">
+    <div class="wishlist-popup__content">
+      <p>Item added to wishlist!</p>
+      <button class="wishlist-popup__close">Close</button>
+    </div>
+  </div>
+  
+  <div id="cart-notification" class="cart-notification">
+    <div class="cart-notification__content">
+      <p>Item added to cart!</p>
+      <div class="cart-notification__buttons">
+        <button class="cart-notification__continue">Continue Shopping</button>
+        <a href="/cart" class="cart-notification__checkout">View Cart</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="scroll-down-indicator">
+    <div class="scroll-down-circle">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="scroll-text">Scroll Down</div>
+  </div>
+</body>
+</html>

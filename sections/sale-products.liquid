@@ -1,0 +1,113 @@
+<section class="section section-sale-products" style="background-color: {{ section.settings.background_color }};">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+      <div class="section-subtitle">{{ section.settings.subtitle | escape }}</div>
+    </div>
+    
+    <div class="products-slider" data-products-to-show="{{ section.settings.products_to_show }}">
+      {% assign collection = collections[section.settings.collection] %}
+      {% if collection != blank %}
+        {% for product in collection.products limit: section.settings.products_to_show %}
+          {% if product.compare_at_price > product.price %}
+            <div class="product-card-wrapper">
+              {% render 'product-card',
+                product: product,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating
+              %}
+            </div>
+          {% endif %}
+        {% else %}
+          {% for i in (1..section.settings.products_to_show) %}
+            <div class="product-card-wrapper">
+              {% render 'product-card-placeholder' %}
+            </div>
+          {% endfor %}
+        {% endfor %}
+      {% else %}
+        {% for i in (1..section.settings.products_to_show) %}
+          <div class="product-card-wrapper">
+            {% render 'product-card-placeholder' %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    
+    {% if section.settings.view_all and collection != blank %}
+      <div class="center">
+        <a href="{{ collection.url }}" class="button button-primary">
+          {{ section.settings.view_all_text | escape }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sale Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "SALE ITEMS",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show product vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": true,
+      "label": "Show product rating"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#f8f8f8",
+      "label": "Background color"
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all",
+      "default": true,
+      "label": "Show 'View all' button"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "default": "VIEW ALL SALE ITEMS",
+      "label": "View all button text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Products"
+    }
+  ]
+}
+{% endschema %}

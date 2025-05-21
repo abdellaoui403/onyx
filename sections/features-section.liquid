@@ -1,0 +1,138 @@
+<div class="features-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>{{ section.settings.title | default: 'Why Choose Us' }}</h2>
+    </div>
+    
+    <div class="features-grid">
+      {% for block in section.blocks %}
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            {% case block.settings.icon %}
+              {% when 'truck' %}
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 3H1V16H16V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16 8H20L23 11V16H16V8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5.5 21C6.88071 21 8 19.8807 8 18.5C8 17.1193 6.88071 16 5.5 16C4.11929 16 3 17.1193 3 18.5C3 19.8807 4.11929 21 5.5 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M18.5 21C19.8807 21 21 19.8807 21 18.5C21 17.1193 19.8807 16 18.5 16C17.1193 16 16 17.1193 16 18.5C16 19.8807 17.1193 21 18.5 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {% when 'shield' %}
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {% when 'headphones' %}
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 18V12C3 9.61305 3.94821 7.32387 5.63604 5.63604C7.32387 3.94821 9.61305 3 12 3C14.3869 3 16.6761 3.94821 18.364 5.63604C20.0518 7.32387 21 9.61305 21 12V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H18C17.4696 21 16.9609 20.7893 16.5858 20.4142C16.2107 20.0391 16 19.5304 16 19V15C16 14.4696 16.2107 13.9609 16.5858 13.5858C16.9609 13.2107 17.4696 13 18 13H21V19ZM3 19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H6C6.53043 21 7.03914 20.7893 7.41421 20.4142C7.78929 20.0391 8 19.5304 8 19V15C8 14.4696 7.78929 13.9609 7.41421 13.5858C7.03914 13.2107 6.53043 13 6 13H3V19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {% when 'refresh' %}
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23 4V10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1 20V14H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M3.51 9.00001C4.01717 7.56645 4.87913 6.2788 6.01547 5.27543C7.1518 4.27206 8.52547 3.58195 10.0083 3.26763C11.4911 2.95331 13.0348 3.02433 14.4761 3.47235C15.9175 3.92036 17.2072 4.72571 18.19 5.81001L23 10M1 14L5.81 18.19C6.79283 19.2743 8.08254 20.0796 9.52387 20.5277C10.9652 20.9757 12.5089 21.0467 13.9917 20.7324C15.4745 20.4181 16.8482 19.728 17.9845 18.7246C19.1209 17.7212 19.9828 16.4336 20.49 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {% else %}
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {% endcase %}
+          </div>
+          <h3 class="feature-card__title">{{ block.settings.title }}</h3>
+          <p class="feature-card__text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Features Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Why Choose Us"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "headphones",
+              "label": "Headphones"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Free shipping on all orders over $100"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Section",
+      "category": "Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "text": "Free shipping on all orders over $100"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Secure Payment",
+            "text": "100% secure payment"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "headphones",
+            "title": "24/7 Support",
+            "text": "Dedicated support"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

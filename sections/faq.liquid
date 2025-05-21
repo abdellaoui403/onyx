@@ -1,0 +1,59 @@
+<section class="section section-faq">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+      <div class="section-subtitle">{{ section.settings.subtitle | escape }}</div>
+    </div>
+    
+    <div class="faq-container">
+      {% for block in section.blocks %}
+        <div class="faq-item" {{ block.shopify_attributes }}>
+          <button class="faq-question" aria-expanded="false">
+            {{ block.settings.question | escape }}
+            <span class="faq-icon">
+              {% render 'icon-plus' %}
+              {% render 'icon-minus' %}
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "FREQUENTLY ASKED QUESTIONS",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "default": "Find answers to our most commonly asked questions. If you can't find what you're looking for, please contact our customer support team.",
+      "label": "Subtitle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "default": "What materials are used in your fitness apparel?",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",

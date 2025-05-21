@@ -1,0 +1,119 @@
+<div class="categories-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>{{ section.settings.title | default: 'Shop By Category' }}</h2>
+    </div>
+    
+    <div class="categories-grid">
+      {% for block in section.blocks %}
+        <div class="category-card">
+          {% if block.settings.image != blank %}
+            <img 
+              src="{{ block.settings.image | img_url: 'large' }}" 
+              alt="{{ block.settings.title }}" 
+              class="category-card__image"
+              loading="lazy"
+            >
+          {% else %}
+            {{ 'category-placeholder.jpg' | asset_url | img_tag: block.settings.title, 'category-card__image' }}
+          {% endif %}
+          
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">{{ block.settings.title }}</h3>
+            {% if block.settings.product_count != blank %}
+              <div class="category-card__count">{{ block.settings.product_count }} Products</div>
+            {% endif %}
+            {% if block.settings.button_text != blank and block.settings.button_url != blank %}
+              <a href="{{ block.settings.button_url }}" class="btn">{{ block.settings.button_text }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Categories Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop By Category"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Category Name"
+        },
+        {
+          "type": "text",
+          "id": "product_count",
+          "label": "Product count",
+          "default": "24"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categories Section",
+      "category": "Collections",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Men's Collection",
+            "product_count": "42",
+            "button_text": "Shop Now",
+            "button_url": "/collections/men"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Women's Collection",
+            "product_count": "38",
+            "button_text": "Shop Now",
+            "button_url": "/collections/women"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Accessories",
+            "product_count": "24",
+            "button_text": "Shop Now",
+            "button_url": "/collections/accessories"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

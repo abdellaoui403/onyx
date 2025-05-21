@@ -1,0 +1,179 @@
+<section class="section section-blog">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+      <div class="section-subtitle">{{ section.settings.subtitle | escape }}</div>
+    </div>
+    
+    <div class="blog-grid">
+      {% assign blog = blogs[section.settings.blog] %}
+      {% if blog != blank %}
+        {% for article in blog.articles limit: section.settings.posts_to_show %}
+          <div class="blog-card">
+            <div class="blog-card-image">
+              {% if article.image != blank %}
+                <a href="{{ article.url }}">
+                  <img 
+                    src="{{ article.image | img_url: '600x400', crop: 'center' }}" 
+                    alt="{{ article.title }}"
+                    loading="lazy"
+                  >
+                </a>
+              {% else %}
+                <a href="{{ article.url }}">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </a>
+              {% endif %}
+            </div>
+            
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="blog-card-date">
+                  {% render 'icon-calendar' %}
+                  {{ article.published_at | date: format: 'abbreviated_date' }}
+                </span>
+                <span class="blog-card-author">
+                  {% render 'icon-user' %}
+                  {{ article.author }}
+                </span>
+              </div>
+              
+              {% if article.tags.size > 0 %}
+                <div class="blog-card-category">{{ article.tags.first }}</div>
+              {% endif %}
+              
+              <h3 class="blog-card-title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h3>
+              
+              <div class="blog-card-excerpt">
+                {% if article.excerpt != blank %}
+                  {{ article.excerpt | strip_html | truncatewords: 20 }}
+                {% else %}
+                  {{ article.content | strip_html | truncatewords: 20 }}
+                {% endif %}
+              </div>
+              
+              <a href="{{ article.url }}" class="blog-card-link">Read More →</a>
+            </div>
+          </div>
+        {% else %}
+          {% for i in (1..section.settings.posts_to_show) %}
+            <div class="blog-card">
+              <div class="blog-card-image">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="blog-card-content">
+                <div class="blog-card-meta">
+                  <span class="blog-card-date">
+                    {% render 'icon-calendar' %}
+                    {{ 'now' | date: format: 'abbreviated_date' }}
+                  </span>
+                  <span class="blog-card-author">
+                    {% render 'icon-user' %}
+                    Author Name
+                  </span>
+                </div>
+                <div class="blog-card-category">Category</div>
+                <h3 class="blog-card-title">
+                  <a href="#">Sample Blog Post Title</a>
+                </h3>
+                <div class="blog-card-excerpt">
+                  This is a sample blog post excerpt. Your actual blog posts will appear here.
+                </div>
+                <a href="#" class="blog-card-link">Read More →</a>
+              </div>
+            </div>
+          {% endfor %}
+        {% endfor %}
+      {% else %}
+        {% for i in (1..section.settings.posts_to_show) %}
+          <div class="blog-card">
+            <div class="blog-card-image">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="blog-card-date">
+                  {% render 'icon-calendar' %}
+                  {{ 'now' | date: format: 'abbreviated_date' }}
+                </span>
+                <span class="blog-card-author">
+                  {% render 'icon-user' %}
+                  Author Name
+                </span>
+              </div>
+              <div class="blog-card-category">Category</div>
+              <h3 class="blog-card-title">
+                <a href="#">Sample Blog Post Title</a>
+              </h3>
+              <div class="blog-card-excerpt">
+                This is a sample blog post excerpt. Your actual blog posts will appear here.
+              </div>
+              <a href="#" class="blog-card-link">Read More →</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    
+    {% if section.settings.view_all and blog != blank %}
+      <div class="center">
+        <a href="{{ blog.url }}" class="button button-primary">
+          {{ section.settings.view_all_text | escape }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog Posts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "FITNESS BLOG",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "default": "Stay updated with the latest fitness trends, workout tips, and nutritional advice from our experts.",
+      "label": "Subtitle"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "range",
+      "id": "posts_to_show",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 3,
+      "label": "Posts to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all",
+      "default": true,
+      "label": "Show 'View all' button"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "default": "VIEW ALL ARTICLES",
+      "label": "View all button text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Posts"
+    }
+  ]
+}
+{% endschema %}

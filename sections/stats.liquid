@@ -1,0 +1,58 @@
+<div class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      {% for block in section.blocks %}
+        <div class="stat-item">
+          <div class="stat-item__number">{{ block.settings.number }}</div>
+          <div class="stat-item__label">{{ block.settings.label }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Stats",
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "500+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Happy Clients"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stats",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "stat"
+        },
+        {
+          "type": "stat"
+        },
+        {
+          "type": "stat"
+        },
+        {
+          "type": "stat"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

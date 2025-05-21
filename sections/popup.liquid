@@ -1,0 +1,203 @@
+<div id="popup" class="popup" style="display: none;">
+  <div class="popup__content">
+    <button class="popup__close" aria-label="Close popup">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    
+    <div class="popup__body">
+      <h2 class="popup__title">{{ section.settings.title | default: 'Get 10% Off Your First Order' }}</h2>
+      <p class="popup__text">{{ section.settings.text | default: 'Subscribe to our newsletter and receive a 10% discount code for your first purchase.' }}</p>
+      
+      {% form 'customer' %}
+        <div class="popup__form">
+          <input type="email" name="contact[email]" class="popup__input" placeholder="Your email address" required>
+          <button type="submit" class="popup__submit">{{ section.settings.button_text | default: 'Subscribe' }}</button>
+        </div>
+      {% endform %}
+      
+      <div class="popup__footer">
+        <label class="popup__checkbox">
+          <input type="checkbox" id="popup-dont-show">
+          <span>{{ section.settings.checkbox_text | default: 'Don\'t show this popup again' }}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup__content {
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  background-color: #1a1a1a;
+  padding: 3rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.popup__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.popup__title {
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-align: center;
+}
+
+.popup__text {
+  margin-bottom: 2rem;
+  color: #ccc;
+  text-align: center;
+}
+
+.popup__form {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.popup__input {
+  flex: 1;
+  padding: 1.2rem;
+  border: 1px solid #333;
+  background-color: #222;
+  color: #fff;
+}
+
+.popup__submit {
+  padding: 1.2rem 2rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup__submit:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.popup__footer {
+  text-align: center;
+}
+
+.popup__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.popup__checkbox input {
+  margin-right: 0.8rem;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const popup = document.getElementById('popup');
+  const popupClose = document.querySelector('.popup__close');
+  const popupDontShow = document.getElementById('popup-dont-show');
+  
+  // Check if user has closed the popup before
+  const popupClosed = localStorage.getItem('popupClosed');
+  
+  if (!popupClosed && {{ section.settings.show_popup | default: true }}) {
+    // Show popup after delay
+    setTimeout(function() {
+      popup.style.display = 'flex';
+    }, {{ section.settings.delay | default: 5000 }});
+  }
+  
+  // Close popup
+  popupClose.addEventListener('click', function() {
+    popup.style.display = 'none';
+    
+    if (popupDontShow.checked) {
+      localStorage.setItem('popupClosed', 'true');
+    }
+  });
+  
+  // Close popup when clicking outside
+  popup.addEventListener('click', function(e) {
+    if (e.target === popup) {
+      popup.style.display = 'none';
+      
+      if (popupDontShow.checked) {
+        localStorage.setItem('popupClosed', 'true');
+      }
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_popup",
+      "label": "Show popup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Get 10% Off Your First Order"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Subscribe to our newsletter and receive a 10% discount code for your first purchase."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "checkbox_text",
+      "label": "Checkbox text",
+      "default": "Don't show this popup again"
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "min": 1000,
+      "max": 10000,
+      "step": 1000,
+      "unit": "ms",
+      "label": "Delay before showing",
+      "default": 5000
+    }
+  ]
+}
+{% endschema %}

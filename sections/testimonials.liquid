@@ -1,0 +1,153 @@
+<section class="section section-testimonials" style="background-color: {{ section.settings.background_color }};">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+      <div class="section-subtitle">{{ section.settings.subtitle | escape }}</div>
+    </div>
+    
+    <div class="testimonials-slider" data-autoplay="{{ section.settings.autoplay }}" data-delay="{{ section.settings.delay }}">
+      <div class="testimonials-track">
+        {% for block in section.blocks %}
+          <div class="testimonial-item" {{ block.shopify_attributes }}>
+            <div class="testimonial-content">
+              {% if block.settings.image != blank %}
+                <div class="testimonial-image">
+                  <img 
+                    src="{{ block.settings.image | img_url: '150x150', crop: 'center' }}" 
+                    alt="{{ block.settings.name }}"
+                    class="testimonial-avatar"
+                    loading="lazy"
+                  >
+                </div>
+              {% endif %}
+              
+              <div class="testimonial-rating">
+                {% render 'icon-stars', rating: block.settings.rating %}
+              </div>
+              
+              <blockquote class="testimonial-quote">{{ block.settings.quote | escape }}</blockquote>
+              
+              <div class="testimonial-author">
+                <div class="testimonial-name">{{ block.settings.name | escape }}</div>
+                {% if block.settings.role != blank %}
+                  <div class="testimonial-role">{{ block.settings.role | escape }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      
+      <div class="testimonials-controls">
+        <button class="testimonial-prev" aria-label="Previous testimonial">
+          {% render 'icon-chevron-left' %}
+        </button>
+        <div class="testimonials-dots">
+          {% for block in section.blocks %}
+            <button class="testimonial-dot{% if forloop.first %} active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to testimonial {{ forloop.index }}"></button>
+          {% endfor %}
+        </div>
+        <button class="testimonial-next" aria-label="Next testimonial">
+          {% render 'icon-chevron-right' %}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "WHAT OUR CUSTOMERS SAY",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#f8f8f8",
+      "label": "Background color"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate testimonials",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Change testimonials every",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "default": "Customer Name",
+          "label": "Customer name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "default": "Fitness Enthusiast",
+          "label": "Customer role"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "default": "The quality of FitWear's products is exceptional. I've been using their training gear for over a year now, and it still looks brand new despite my intense workout routines.",
+          "label": "Quote"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Rating"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

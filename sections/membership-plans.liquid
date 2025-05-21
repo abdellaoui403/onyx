@@ -1,0 +1,62 @@
+<div class="membership-plans">
+  <div class="container">
+    <div class="section-title">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    
+    <div class="row">
+      {% for block in section.blocks %}
+        <div class="col-md-4">
+          <div class="plan-card">
+            <h3 class="plan-card__name">{{ block.settings.name }}</h3>
+            <div class="plan-card__price">{{ block.settings.price }}</div>
+            <div class="plan-card__duration">{{ block.settings.duration }}</div>
+            
+            <ul class="plan-card__features">
+              {% for i in (1..5) %}
+                {% assign feature_key = 'feature' | append: i %}
+                {% if block.settings[feature_key] != blank %}
+                  <li class="plan-card__feature">{{ block.settings[feature_key] }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            
+            {% if block.settings.button_text != blank and block.settings.button_url != blank %}
+              <a href="{{ block.settings.button_url }}" class="btn">{{ block.settings.button_text }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Membership Plans",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Membership Plans"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "plan",
+      "name": "Plan",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Plan Name",
+          "default": "Basic"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$29"
+        },
+        {

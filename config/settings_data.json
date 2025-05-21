@@ -1,0 +1,126 @@
+{
+"current": {
+  "colors_solid_button_labels": "#ffffff",
+  "colors_accent_1": "#ff0000",
+  "colors_accent_2": "#111111",
+  "colors_text": "#262626",
+  "colors_background_1": "#F2F2F2",
+  "colors_background_2": "#e5e5e5",
+  "type_header_font": "montserrat_n7",
+  "type_body_font": "montserrat_n4",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "Free shipping on orders over $100",
+        "announcement_link": ""
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_width": 150,
+        "menu": "main-menu"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "footer_text": "FITWEAR is a premium fitness apparel brand dedicated to providing high-quality gym attire that combines style, comfort, and functionality.",
+        "copyright_text": "© 2025 FITWEAR. All rights reserved."
+      }
+    },
+    "hero-section": {
+      "type": "hero-section",
+      "settings": {
+        "title": "SHOW YOURSELF IN",
+        "title_highlight": "FASHIONABLE",
+        "title_end": "GYM ATTIRE",
+        "subtitle": "Premium quality gym wear for men and women",
+        "button_text": "Shop Now",
+        "button_url": "/collections/all",
+        "button_text_2": "Learn More",
+        "button_url_2": "/pages/about"
+      }
+    },
+    "featured-products-section": {
+      "type": "featured-products-section",
+      "settings": {
+        "title": "Featured Products",
+        "product_limit": 4,
+        "show_view_all": true,
+        "view_all_text": "View All Products",
+        "view_all_url": "/collections/all"
+      }
+    },
+    "categories-section": {
+      "type": "categories-section",
+      "blocks": {
+        "category-1": {
+          "type": "category",
+          "settings": {
+            "title": "Men's Collection",
+            "product_count": "42",
+            "button_text": "Shop Now",
+            "button_url": "/collections/men"
+          }
+        },
+        "category-2": {
+          "type": "category",
+          "settings": {
+            "title": "Women's Collection",
+            "product_count": "38",
+            "button_text": "Shop Now",
+            "button_url": "/collections/women"
+          }
+        },
+        "category-3": {
+          "type": "category",
+          "settings": {
+            "title": "Accessories",
+            "product_count": "24",
+            "button_text": "Shop Now",
+            "button_url": "/collections/accessories"
+          }
+        }
+      },
+      "settings": {
+        "title": "Shop By Category"
+      }
+    },
+    "features-section": {
+      "type": "features-section",
+      "blocks": {
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "text": "Free shipping on all orders over $100"
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Secure Payment",
+            "text": "100% secure payment"
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "icon": "headphones",
+            "title": "24/7 Support",
+            "text": "Dedicated support"
+          }
+        }
+      },
+      "settings": {
+        "title": "Why Choose Us"
+      }
+    }
+  }
+}
+}

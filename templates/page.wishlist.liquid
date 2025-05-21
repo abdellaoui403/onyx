@@ -1,0 +1,79 @@
+<div class="wishlist">
+  <div class="container">
+    <h1 class="wishlist__title">My Wishlist</h1>
+    
+    <div class="wishlist__empty">
+      <h2 class="wishlist__empty-title">Your wishlist is currently empty</h2>
+      <p class="wishlist__empty-text">Browse our products and add items to your wishlist to save them for later.</p>
+      <a href="/collections/all" class="btn">Browse Products</a>
+    </div>
+    
+    &lt;!-- This is a placeholder for the wishlist items. In a real implementation, this would be populated with JavaScript -->
+    <div class="wishlist__items" style="display: none;">
+      <div class="wishlist-item">
+        <div class="wishlist-item__image">
+          <img src="{{ 'product-1.jpg' | asset_url }}" alt="Product Name">
+        </div>
+        <div class="wishlist-item__info">
+          <h3 class="wishlist-item__title">Product Name</h3>
+          <div class="wishlist-item__price">$99.99</div>
+          <div class="wishlist-item__actions">
+            <a href="#" class="btn">Add to Cart</a>
+          </div>
+        </div>
+        <button class="wishlist-item__remove" aria-label="Remove from wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // This is a placeholder for wishlist functionality
+  // In a real implementation, you would use localStorage or a database to store wishlist items
+  
+  // Example of how to add items to wishlist
+  const wishlistButtons = document.querySelectorAll('.product-card__action.wishlist, .product__wishlist');
+  
+  if (wishlistButtons.length) {
+    wishlistButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Get product data
+        // In a real implementation, you would get this from the product page or API
+        const productData = {
+          id: '123456',
+          title: 'Product Name',
+          price: '$99.99',
+          image: '{{ 'product-1.jpg' | asset_url }}'
+        };
+        
+        // Add to wishlist
+        addToWishlist(productData);
+      });
+    });
+  }
+  
+  function addToWishlist(product) {
+    // In a real implementation, you would store this in localStorage or a database
+    console.log('Added to wishlist:', product);
+    
+    // Show wishlist notification
+    const wishlistPopup = document.querySelector('#wishlist-popup');
+    if (wishlistPopup) {
+      wishlistPopup.classList.add('active');
+      
+      // Auto hide after 3 seconds
+      setTimeout(() => {
+        wishlistPopup.classList.remove('active');
+      }, 3000);
+    }
+  }
+});
+</script>

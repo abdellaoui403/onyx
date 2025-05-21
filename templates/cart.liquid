@@ -1,0 +1,111 @@
+<div class="cart">
+  <div class="container">
+    <h1 class="cart__title">Your Cart</h1>
+    
+    {% if cart.item_count > 0 %}
+      <form action="/cart" method="post" novalidate>
+        <table class="cart__table">
+          <thead class="cart__header">
+            <tr>
+              <th class="cart__header-cell">Product</th>
+              <th class="cart__header-cell">Price</th>
+              <th class="cart__header-cell">Quantity</th>
+              <th class="cart__header-cell">Total</th>
+              <th class="cart__header-cell"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart.items %}
+              <tr class="cart__row">
+                <td class="cart__cell">
+                  <div class="cart__product">
+                    <div class="cart__product-image">
+                      {% if item.image != blank %}
+                        <img 
+                          src="{{ item.image | img_url: 'small' }}" 
+                          alt="{{ item.title | escape }}"
+                          loading="lazy"
+                        >
+                      {% else %}
+                        {{ 'product-1' | placeholder_svg_tag }}
+                      {% endif %}
+                    </div>
+                    <div class="cart__product-details">
+                      <a href="{{ item.url }}" class="cart__product-title">{{ item.product.title }}</a>
+                      {% if item.product.options_with_values.size > 0 %}
+                        <p class="cart__product-variant">
+                          {% for option in item.product.options_with_values %}
+                            {{ option.name }}: {{ item.variant.options[forloop.index0] }}{% unless forloop.last %}, {% endunless %}
+                          {% endfor %}
+                        </p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </td>
+                <td class="cart__cell">
+                  <span class="cart__price">{{ item.price | money }}</span>
+                </td>
+                <td class="cart__cell">
+                  <div class="cart__quantity">
+                    <button type="button" class="cart__quantity-button minus" aria-label="Decrease quantity">-</button>
+                    <input type="number" name="updates[{{ item.key }}]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="1" class="cart__quantity-number">
+                    <button type="button" class="cart__quantity-button plus" aria-label="Increase quantity">+</button>
+                  </div>
+                </td>
+                <td class="cart__cell">
+                  <span class="cart__price">{{ item.line_price | money }}</span>
+                </td>
+                <td class="cart__cell">
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart__remove" aria-label="Remove item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 6H5H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M14 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        <div class="cart__footer">
+          <div class="cart__update">
+            <button type="submit" name="update" class="btn btn--secondary">Update Cart</button>
+            <a href="/collections/all" class="btn btn--secondary">Continue Shopping</a>
+          </div>
+          
+          <div class="cart__totals">
+            <h2 class="cart__totals-title">Cart Total</h2>
+            
+            <div class="cart__totals-row">
+              <span class="cart__totals-label">Subtotal</span>
+              <span class="cart__totals-value">{{ cart.total_price | money }}</span>
+            </div>
+            
+            <div class="cart__totals-row">
+              <span class="cart__totals-label">Shipping</span>
+              <span class="cart__totals-value">Calculated at checkout</span>
+            </div>
+            
+            <div class="cart__totals-row final">
+              <span class="cart__totals-label">Total</span>
+              <span class="cart__totals-value">{{ cart.total_price | money }}</span>
+            </div>
+            
+            <div class="cart__checkout">
+              <button type="submit" name="checkout" class="btn cart__checkout-button">Proceed to Checkout</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    {% else %}
+      <div class="cart__empty">
+        <h2 class="cart__empty-title">Your cart is currently empty</h2>
+        <p class="cart__empty-text">Continue browsing our products to find something you'll love.</p>
+        <a href="/collections/all" class="btn">Continue Shopping</a>
+      </div>
+    {% endif %}
+  </div>
+</div>

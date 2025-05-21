@@ -1,0 +1,122 @@
+<section class="section section-featured-products">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+      <div class="section-subtitle">{{ section.settings.subtitle | escape }}</div>
+    </div>
+    
+    {% if section.settings.show_categories %}
+      <div class="product-filter">
+        <button class="filter-button active" data-filter="all">All</button>
+        {% for product_type in shop.product_types %}
+          {% if product_type != '' %}
+            <button class="filter-button" data-filter="{{ product_type | handle }}">{{ product_type }}</button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    <div class="products-grid">
+      {% assign collection = collections[section.settings.collection] %}
+      {% if collection != blank %}
+        {% for product in collection.products limit: section.settings.products_to_show %}
+          <div class="product-card-wrapper" data-product-type="{{ product.type | handle }}">
+            {% render 'product-card',
+              product: product,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating
+            %}
+          </div>
+        {% else %}
+          {% for i in (1..section.settings.products_to_show) %}
+            <div class="product-card-wrapper">
+              {% render 'product-card-placeholder' %}
+            </div>
+          {% endfor %}
+        {% endfor %}
+      {% else %}
+        {% for i in (1..section.settings.products_to_show) %}
+          <div class="product-card-wrapper">
+            {% render 'product-card-placeholder' %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    
+    {% if section.settings.view_all and collection != blank and collection.all_products_count > section.settings.products_to_show %}
+      <div class="center">
+        <a href="{{ collection.url }}" class="button button-primary">
+          {{ section.settings.view_all_text | escape }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "FEATURED PRODUCTS",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_categories",
+      "default": true,
+      "label": "Show category filter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show product vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": true,
+      "label": "Show product rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all",
+      "default": true,
+      "label": "Show 'View all' button"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "default": "VIEW ALL PRODUCTS",
+      "label": "View all button text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

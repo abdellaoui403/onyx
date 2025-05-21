@@ -1,0 +1,85 @@
+<div class="trainers-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    
+    <div class="trainers-grid">
+      {% for block in section.blocks %}
+        <div class="trainer-card">
+          {% if block.settings.image != blank %}
+            <div class="trainer-card__image-wrapper">
+              <img 
+                src="{{ block.settings.image | img_url: 'master' }}" 
+                alt="{{ block.settings.name }}" 
+                class="trainer-card__image"
+                loading="lazy"
+              >
+            </div>
+          {% endif %}
+          
+          <div class="trainer-card__info">
+            <h3 class="trainer-card__name">{{ block.settings.name }}</h3>
+            <div class="trainer-card__role">{{ block.settings.role }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trainers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Meet Our Trainers"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trainer",
+      "name": "Trainer",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Trainer Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Trainer Name",
+          "default": "John Smith"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Trainer Role",
+          "default": "Strength Coach"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trainers",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "trainer"
+        },
+        {
+          "type": "trainer"
+        },
+        {
+          "type": "trainer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
