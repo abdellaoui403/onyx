@@ -6,30 +6,33 @@
   </div>
 </div>
 
-<header class="site-header{% if section.settings.sticky_header %} sticky-header{% endif %}">
-  <div class="page-width header-wrapper">
-    <div class="header-item header-logo">
+<header class="header{% if section.settings.sticky_header %} sticky-header{% endif %}">
+  <div class="page-width header__content">
+    
+    <!-- Logo -->
+    <div class="header__logo">
       {% if section.settings.logo != blank %}
-        <a href="/" class="header-logo-link">
+        <a href="/" class="header__logo-link">
           <img 
             src="{{ section.settings.logo | img_url: 'medium' }}" 
             alt="{{ section.settings.logo.alt | default: shop.name }}"
             width="{{ section.settings.logo_width }}"
-            class="header-logo-image"
+            class="header__logo-image"
           >
         </a>
       {% else %}
-        <a href="/" class="header-logo-text">
+        <a href="/" class="header__logo-text">
           <span class="logo-part-1">ON</span><span class="logo-part-2">YX</span>
         </a>
       {% endif %}
     </div>
 
-    <nav class="header-nav">
-      <ul class="header-nav-list">
+    <!-- Navigation -->
+    <nav class="header__nav">
+      <ul class="header__menu">
         {% for link in section.settings.menu.links %}
-          <li class="header-nav-item">
-            <a href="{{ link.url }}" class="header-nav-link{% if link.active %} active{% endif %}">
+          <li class="header__menu-item">
+            <a href="{{ link.url }}" class="header__menu-link{% if link.active %} active{% endif %}">
               {{ link.title }}
             </a>
           </li>
@@ -37,39 +40,45 @@
       </ul>
     </nav>
 
-    <div class="header-icons">
-      <a href="/search" class="header-icon-link">
+    <!-- Icons -->
+    <div class="header__icons">
+      <a href="/search" class="header__icon" aria-label="Search">
         {% render 'icon-search' %}
       </a>
-      <a href="/account" class="header-icon-link">
+      <a href="/account" class="header__icon" aria-label="Account">
         {% render 'icon-account' %}
       </a>
-      <a href="/pages/wishlist" class="header-icon-link header-icon-wishlist">
+      <a href="/pages/wishlist" class="header__icon" aria-label="Wishlist">
         {% render 'icon-heart' %}
-        <span class="wishlist-count">0</span>
+        <span class="header__cart-count">0</span>
       </a>
-      <a href="/cart" class="header-icon-link header-icon-cart">
+      <a href="/cart" class="header__icon" aria-label="Cart">
         {% render 'icon-cart' %}
-        <span class="cart-count">{{ cart.item_count }}</span>
+        <span class="header__cart-count">{{ cart.item_count }}</span>
       </a>
     </div>
 
-    <button class="mobile-nav-toggle" aria-expanded="false">
+    <!-- Mobile toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       {% render 'icon-hamburger' %}
       <span class="visually-hidden">Menu</span>
     </button>
   </div>
 
-  <div class="mobile-nav">
-    <ul class="mobile-nav-list">
-      {% for link in section.settings.menu.links %}
-        <li class="mobile-nav-item">
-          <a href="{{ link.url }}" class="mobile-nav-link{% if link.active %} active{% endif %}">
-            {{ link.title }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
+  <!-- Mobile Navigation -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu__inner">
+      <button class="mobile-menu__close" aria-label="Close menu">&times;</button>
+      <ul class="mobile-menu__list">
+        {% for link in section.settings.menu.links %}
+          <li class="mobile-menu__item">
+            <a href="{{ link.url }}" class="mobile-menu__link{% if link.active %} active{% endif %}">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </header>
 
