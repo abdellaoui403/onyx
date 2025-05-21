@@ -1,126 +1,195 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-"current": {
-  "colors_solid_button_labels": "#ffffff",
-  "colors_accent_1": "#ff0000",
-  "colors_accent_2": "#111111",
-  "colors_text": "#262626",
-  "colors_background_1": "#F2F2F2",
-  "colors_background_2": "#e5e5e5",
-  "type_header_font": "montserrat_n7",
-  "type_body_font": "montserrat_n4",
-  "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "show_announcement": true,
-        "announcement_text": "Free shipping on orders over $100",
-        "announcement_link": ""
-      }
-    },
-    "header": {
-      "type": "header",
-      "settings": {
-        "logo_width": 150,
-        "menu": "main-menu"
-      }
-    },
-    "footer": {
-      "type": "footer",
-      "settings": {
-        "footer_text": "FITWEAR is a premium fitness apparel brand dedicated to providing high-quality gym attire that combines style, comfort, and functionality.",
-        "copyright_text": "© 2025 FITWEAR. All rights reserved."
-      }
-    },
-    "hero-section": {
-      "type": "hero-section",
-      "settings": {
-        "title": "SHOW YOURSELF IN",
-        "title_highlight": "FASHIONABLE",
-        "title_end": "GYM ATTIRE",
-        "subtitle": "Premium quality gym wear for men and women",
-        "button_text": "Shop Now",
-        "button_url": "/collections/all",
-        "button_text_2": "Learn More",
-        "button_url_2": "/pages/about"
-      }
-    },
-    "featured-products-section": {
-      "type": "featured-products-section",
-      "settings": {
-        "title": "Featured Products",
-        "product_limit": 4,
-        "show_view_all": true,
-        "view_all_text": "View All Products",
-        "view_all_url": "/collections/all"
-      }
-    },
-    "categories-section": {
-      "type": "categories-section",
-      "blocks": {
-        "category-1": {
-          "type": "category",
-          "settings": {
-            "title": "Men's Collection",
-            "product_count": "42",
-            "button_text": "Shop Now",
-            "button_url": "/collections/men"
-          }
-        },
-        "category-2": {
-          "type": "category",
-          "settings": {
-            "title": "Women's Collection",
-            "product_count": "38",
-            "button_text": "Shop Now",
-            "button_url": "/collections/women"
-          }
-        },
-        "category-3": {
-          "type": "category",
-          "settings": {
-            "title": "Accessories",
-            "product_count": "24",
-            "button_text": "Shop Now",
-            "button_url": "/collections/accessories"
-          }
+  "current": {
+    "colors_solid_button_labels": "#ffffff",
+    "colors_accent_1": "#ff0000",
+    "colors_accent_2": "#111111",
+    "colors_text": "#262626",
+    "colors_background_1": "#F2F2F2",
+    "colors_background_2": "#e5e5e5",
+    "type_header_font": "montserrat_n7",
+    "type_body_font": "montserrat_n4",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_announcement": true,
+          "announcement_text": "Free shipping on orders over $100",
+          "announcement_link": ""
         }
       },
-      "settings": {
-        "title": "Shop By Category"
-      }
-    },
-    "features-section": {
-      "type": "features-section",
-      "blocks": {
-        "feature-1": {
-          "type": "feature",
-          "settings": {
-            "icon": "truck",
-            "title": "Free Shipping",
-            "text": "Free shipping on all orders over $100"
-          }
-        },
-        "feature-2": {
-          "type": "feature",
-          "settings": {
-            "icon": "shield",
-            "title": "Secure Payment",
-            "text": "100% secure payment"
-          }
-        },
-        "feature-3": {
-          "type": "feature",
-          "settings": {
-            "icon": "headphones",
-            "title": "24/7 Support",
-            "text": "Dedicated support"
-          }
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify://shop_images/LOGOONYX.svg",
+          "logo_width": 100,
+          "menu": "main-menu",
+          "sticky_header": true,
+          "announcement_text": "Free shipping on all orders over $100",
+          "announcement_bg_color": "#ff0000"
         }
       },
-      "settings": {
-        "title": "Why Choose Us"
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_text": "FITWEAR is a premium fitness apparel brand dedicated to providing high-quality gym attire that combines style, comfort, and functionality.",
+          "copyright_text": "© 2025 FITWEAR. All rights reserved."
+        }
+      },
+      "featured-products-section": {
+        "type": "featured-products-section",
+        "settings": {
+          "title": "Featured Products",
+          "collection": "",
+          "product_limit": 4,
+          "show_view_all": true,
+          "view_all_text": "View All Products",
+          "view_all_url": "/collections/all"
+        }
+      },
+      "categories-section": {
+        "type": "categories-section",
+        "settings": {
+          "title": "Shop By Category"
+        }
+      },
+      "features-section": {
+        "type": "features-section",
+        "settings": {
+          "title": "Why Choose Us"
+        }
+      },
+      "hero-slider": {
+        "type": "hero-slider",
+        "settings": {
+          "autoplay": true,
+          "delay": 5
+        }
+      },
+      "features": {
+        "type": "features",
+        "settings": {}
+      },
+      "featured-categories": {
+        "type": "featured-categories",
+        "settings": {
+          "title": "SHOP BY CATEGORY",
+          "subtitle": ""
+        }
+      },
+      "new-arrivals": {
+        "type": "new-arrivals",
+        "settings": {
+          "title": "NEW ARRIVALS",
+          "subtitle": "",
+          "collection": "",
+          "products_to_show": 4,
+          "show_vendor": false,
+          "show_rating": true,
+          "view_all": true,
+          "view_all_text": "VIEW ALL NEW ARRIVALS"
+        }
+      },
+      "featured-products": {
+        "type": "featured-products",
+        "settings": {
+          "title": "FEATURED PRODUCTS",
+          "subtitle": "",
+          "collection": "",
+          "products_to_show": 8,
+          "show_categories": true,
+          "show_vendor": false,
+          "show_rating": true,
+          "view_all": true,
+          "view_all_text": "VIEW ALL PRODUCTS"
+        }
+      },
+      "video-showcase": {
+        "type": "video-showcase",
+        "settings": {
+          "title": "PERFORMANCE IN ACTION",
+          "subtitle": "See how our premium fitness apparel performs in real-world training scenarios.",
+          "video_url": "",
+          "overlay_title": "TRAIN LIKE A CHAMPION",
+          "overlay_text": "Our performance gear is designed to help you push your limits and achieve your fitness goals.",
+          "button_label": "SHOP PERFORMANCE GEAR",
+          "button_link": ""
+        }
+      },
+      "sale-products": {
+        "type": "sale-products",
+        "settings": {
+          "title": "SALE ITEMS",
+          "subtitle": "",
+          "collection": "",
+          "products_to_show": 4,
+          "show_vendor": false,
+          "show_rating": true,
+          "background_color": "#f8f8f8",
+          "view_all": true,
+          "view_all_text": "VIEW ALL SALE ITEMS"
+        }
+      },
+      "promo-banner": {
+        "type": "promo-banner",
+        "settings": {
+          "background_color": "#f8f8f8",
+          "title": "SUMMER SALE",
+          "subtitle": "UP TO 50% OFF",
+          "text": "Limited time offer on our premium fitness collection. Upgrade your workout gear today and save big!",
+          "button1_label": "SHOP MEN",
+          "button1_link": "",
+          "button2_label": "SHOP WOMEN",
+          "button2_link": ""
+        }
+      },
+      "testimonials": {
+        "type": "testimonials",
+        "settings": {
+          "title": "WHAT OUR CUSTOMERS SAY",
+          "subtitle": "",
+          "background_color": "#f8f8f8",
+          "autoplay": true,
+          "delay": 5
+        }
+      },
+      "blog-posts": {
+        "type": "blog-posts",
+        "settings": {
+          "title": "FITNESS BLOG",
+          "subtitle": "Stay updated with the latest fitness trends, workout tips, and nutritional advice from our experts.",
+          "blog": "",
+          "posts_to_show": 3,
+          "view_all": true,
+          "view_all_text": "VIEW ALL ARTICLES"
+        }
+      },
+      "brands": {
+        "type": "brands",
+        "settings": {
+          "title": "OUR BRANDS",
+          "subtitle": "",
+          "background_color": "#ffffff"
+        }
+      },
+      "instagram-feed": {
+        "type": "instagram-feed",
+        "custom_css": [],
+        "settings": {
+          "title": "FOLLOW US ON INSTAGRAM",
+          "subtitle": "Share your fitness journey with us by tagging @fitwear in your posts. Get featured on our page and inspire others!",
+          "username": "fitwear"
+        }
       }
-    }
+    },
+    "content_for_index": []
   }
-}
 }
