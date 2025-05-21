@@ -1,121 +1,125 @@
-<div class="announcement-bar" style="background-color: {{ section.settings.announcement_bg_color }};">
-  <div class="page-width">
-    <p class="announcement-text">
-      {{ section.settings.announcement_text | escape }}
-    </p>
-  </div>
-</div>
+{% comment %}
+  This is a Shopify Liquid conversion of the original React/Next.js header component.
+  It includes a sticky header, mobile menu toggle, wishlist/cart counters, and search drawer compatibility.
+{% endcomment %}
 
-<header class="site-header{% if section.settings.sticky_header %} sticky-header{% endif %}">
-  <div class="page-width header-wrapper">
-    <div class="header-item header-logo">
-      {% if section.settings.logo != blank %}
-        <a href="/" class="header-logo-link">
-          <img 
-            src="{{ section.settings.logo | img_url: 'medium' }}" 
-            alt="{{ section.settings.logo.alt | default: shop.name }}"
-            width="{{ section.settings.logo_width }}"
-            class="header-logo-image"
-          >
-        </a>
-      {% else %}
-        <a href="/" class="header-logo-text">
-          <span class="logo-part-1">ON</span><span class="logo-part-2">YX</span>
-        </a>
-      {% endif %}
+<style>
+  .site-header {
+    background: black;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    transition: all 0.3s ease;
+  }
+  .scrolled {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+</style>
+
+<header class="site-header" id="site-header">
+  <!-- Top Bar -->
+  <div class="hidden md:flex justify-between items-center px-6 py-2 border-b border-zinc-800 text-sm">
+    <div class="flex gap-6">
+      <a href="/pages/about" class="hover:text-red-600">About</a>
+      <a href="/pages/store-locator" class="hover:text-red-600">Store Locator</a>
+      <a href="/blogs/news" class="hover:text-red-600">Blog</a>
+      <a href="/pages/faqs" class="hover:text-red-600">FAQs</a>
     </div>
+    <div class="flex gap-6">
+      <div class="flex items-center gap-2">
+        <span class="text-red-600">@</span>
+        <span>fitwear@fitness.com</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-red-600">📍</span>
+        <span>No 58A, Baltimore Street, USA</span>
+      </div>
+    </div>
+  </div>
 
-    <nav class="header-nav">
-      <ul class="header-nav-list">
-        {% for link in section.settings.menu.links %}
-          <li class="header-nav-item">
-            <a href="{{ link.url }}" class="header-nav-link{% if link.active %} active{% endif %}">
-              {{ link.title }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
+  <!-- Main Header -->
+  <div class="flex justify-between items-center px-6 py-4">
+    <a href="/" class="text-3xl font-bold">
+      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }} logo" height="100" />
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex gap-8">
+      <a href="/" class="text-red-600 font-medium uppercase">Home</a>
+      <a href="/collections" class="hover:text-red-600 uppercase">Collections</a>
+      <a href="/collections/all" class="hover:text-red-600 uppercase">Shop</a>
+      <a href="/collections/new-arrivals" class="hover:text-red-600 uppercase">New Arrivals</a>
+      <a href="/collections/sale" class="hover:text-red-600 uppercase">Sale</a>
+      <a href="/pages/contact" class="hover:text-red-600 uppercase">Contact</a>
     </nav>
 
-    <div class="header-icons">
-      <a href="/search" class="header-icon-link">
-        {% render 'icon-search' %}
+    <!-- Icons -->
+    <div class="flex items-center gap-4">
+      <a href="/search" class="p-2 hover:text-red-600">🔍</a>
+      <a href="/account" class="p-2 hover:text-red-600">👤</a>
+      <a href="/pages/wishlist" class="relative p-2 hover:text-red-600">
+        ❤️
+        <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span>
       </a>
-      <a href="/account" class="header-icon-link">
-        {% render 'icon-account' %}
+      <a href="/cart" class="relative p-2 hover:text-red-600">
+        🛒
+        <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">{{ cart.item_count }}</span>
       </a>
-      <a href="/pages/wishlist" class="header-icon-link header-icon-wishlist">
-        {% render 'icon-heart' %}
-        <span class="wishlist-count">0</span>
-      </a>
-      <a href="/cart" class="header-icon-link header-icon-cart">
-        {% render 'icon-cart' %}
-        <span class="cart-count">{{ cart.item_count }}</span>
-      </a>
+      <a href="/account/login" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 uppercase">Log in</a>
+
+      <button class="md:hidden js-toggle-menu">
+        ☰
+      </button>
     </div>
-
-    <button class="mobile-nav-toggle" aria-expanded="false">
-      {% render 'icon-hamburger' %}
-      <span class="visually-hidden">Menu</span>
-    </button>
   </div>
 
-  <div class="mobile-nav">
-    <ul class="mobile-nav-list">
-      {% for link in section.settings.menu.links %}
-        <li class="mobile-nav-item">
-          <a href="{{ link.url }}" class="mobile-nav-link{% if link.active %} active{% endif %}">
-            {{ link.title }}
-          </a>
-        </li>
-      {% endfor %}
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav hidden fixed inset-0 bg-black z-40 p-6">
+    <div class="flex justify-between mb-6">
+      <a href="/" class="text-white text-2xl font-bold">FIT<span class="text-red-600">WEAR</span></a>
+      <button class="js-toggle-menu text-white text-xl">✖</button>
+    </div>
+    <ul class="flex flex-col gap-6 text-xl">
+      <li><a href="/" class="text-red-600">Home</a></li>
+      <li><a href="/collections" class="hover:text-red-600">Collections</a></li>
+      <li><a href="/collections/all" class="hover:text-red-600">Shop</a></li>
+      <li><a href="/collections/new-arrivals" class="hover:text-red-600">New Arrivals</a></li>
+      <li><a href="/collections/sale" class="hover:text-red-600">Sale</a></li>
+      <li><a href="/pages/contact" class="hover:text-red-600">Contact</a></li>
     </ul>
-  </div>
+
+    <div class="mt-8 flex flex-col gap-4 text-sm">
+      <a href="/pages/about" class="hover:text-red-600">About</a>
+      <a href="/pages/store-locator" class="hover:text-red-600">Store Locator</a>
+      <a href="/blogs/news" class="hover:text-red-600">Blog</a>
+      <a href="/pages/faqs" class="hover:text-red-600">FAQs</a>
+      <div class="flex gap-2 mt-4">
+        <span class="text-red-600">📧</span>
+        <span>fitwear@fitness.com</span>
+      </div>
+      <div class="flex gap-2">
+        <span class="text-red-600">📍</span>
+        <span>No 58A, Baltimore Street, USA</span>
+      </div>
+    </div>
+  </nav>
 </header>
 
-{% schema %}
-{
-  "name": "Header",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "min": 50,
-      "max": 250,
-      "step": 10,
-      "default": 100,
-      "unit": "px",
-      "label": "Logo width"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "default": "main-menu",
-      "label": "Menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "sticky_header",
-      "default": true,
-      "label": "Sticky header"
-    },
-    {
-      "type": "text",
-      "id": "announcement_text",
-      "default": "Free shipping on all orders over $100",
-      "label": "Announcement text"
-    },
-    {
-      "type": "color",
-      "id": "announcement_bg_color",
-      "default": "#ff0000",
-      "label": "Announcement background"
-    }
-  ]
-}
-{% endschema %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const header = document.getElementById('site-header');
+    const toggleBtn = document.querySelectorAll('.js-toggle-menu');
+    const mobileNav = document.querySelector('.mobile-nav');
+
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    toggleBtn.forEach(btn => {
+      btn.addEventListener('click', () => {
+        mobileNav.classList.toggle('hidden');
+      });
+    });
+  });
+</script>
