@@ -17,6 +17,12 @@ html {
   box-sizing: border-box;
 }
 
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
