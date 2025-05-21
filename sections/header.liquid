@@ -1,12 +1,4 @@
-<style>
-  .announcement-bar {
-    background-color: {{ section.settings.announcement_bg_color }};
-    padding: 10px 0;
-    text-align: center;
-  }
-</style>
-
-<div class="announcement-bar">
+<div class="announcement-bar" style="background-color: {{ section.settings.announcement_bg_color }};">
   <div class="page-width">
     <p class="announcement-text">
       {{ section.settings.announcement_text | escape }}
@@ -16,26 +8,23 @@
 
 <header class="site-header{% if section.settings.sticky_header %} sticky-header{% endif %}">
   <div class="page-width header-wrapper">
-    
-    <!-- Logo -->
     <div class="header-item header-logo">
-      <a href="/" class="header-logo-link">
-        {% if section.settings.logo != blank %}
+      {% if section.settings.logo != blank %}
+        <a href="/" class="header-logo-link">
           <img 
             src="{{ section.settings.logo | img_url: 'medium' }}" 
             alt="{{ section.settings.logo.alt | default: shop.name }}"
-            width="{{ section.settings.logo_width | default: 100 }}"
+            width="{{ section.settings.logo_width }}"
             class="header-logo-image"
           >
-        {% else %}
-          <span class="header-logo-text">
-            <span class="logo-part-1">ON</span><span class="logo-part-2">YX</span>
-          </span>
-        {% endif %}
-      </a>
+        </a>
+      {% else %}
+        <a href="/" class="header-logo-text">
+          <span class="logo-part-1">ON</span><span class="logo-part-2">YX</span>
+        </a>
+      {% endif %}
     </div>
 
-    <!-- Navigation -->
     <nav class="header-nav">
       <ul class="header-nav-list">
         {% for link in section.settings.menu.links %}
@@ -48,33 +37,30 @@
       </ul>
     </nav>
 
-    <!-- Icons -->
     <div class="header-icons">
-      <a href="/search" class="header-icon-link" aria-label="Search">
+      <a href="/search" class="header-icon-link">
         {% render 'icon-search' %}
       </a>
-      <a href="/account" class="header-icon-link" aria-label="Account">
+      <a href="/account" class="header-icon-link">
         {% render 'icon-account' %}
       </a>
-      <a href="/pages/wishlist" class="header-icon-link header-icon-wishlist" aria-label="Wishlist">
+      <a href="/pages/wishlist" class="header-icon-link header-icon-wishlist">
         {% render 'icon-heart' %}
         <span class="wishlist-count">0</span>
       </a>
-      <a href="/cart" class="header-icon-link header-icon-cart" aria-label="Cart">
+      <a href="/cart" class="header-icon-link header-icon-cart">
         {% render 'icon-cart' %}
         <span class="cart-count">{{ cart.item_count }}</span>
       </a>
     </div>
 
-    <!-- Mobile Nav Toggle -->
-    <button class="mobile-nav-toggle" aria-expanded="false" aria-label="Toggle menu">
+    <button class="mobile-nav-toggle" aria-expanded="false">
       {% render 'icon-hamburger' %}
+      <span class="visually-hidden">Menu</span>
     </button>
-
   </div>
 
-  <!-- Mobile Navigation -->
-  <nav class="mobile-nav">
+  <div class="mobile-nav">
     <ul class="mobile-nav-list">
       {% for link in section.settings.menu.links %}
         <li class="mobile-nav-item">
@@ -84,5 +70,52 @@
         </li>
       {% endfor %}
     </ul>
-  </nav>
+  </div>
 </header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "px",
+      "label": "Logo width"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "default": true,
+      "label": "Sticky header"
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "default": "Free shipping on all orders over $100",
+      "label": "Announcement text"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bg_color",
+      "default": "#ff0000",
+      "label": "Announcement background"
+    }
+  ]
+}
+{% endschema %}
