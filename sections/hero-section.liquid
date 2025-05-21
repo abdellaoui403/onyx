@@ -1,98 +1,155 @@
-{% comment %}
-  Shopify version of the React Hero Slider
-{% endcomment %}
-
-<section class="hero relative h-screen bg-black flex items-center justify-center overflow-hidden">
-  <!-- Background image dynamic -->
-  <div class="hero__slides">
+<div class="hero-slider" data-autoplay="{{ section.settings.autoplay }}" data-delay="{{ section.settings.delay }}">
+  <div class="hero-slider-container">
     {% for block in section.blocks %}
-      <div
-        class="absolute inset-0 bg-cover bg-center opacity-30 transition-opacity duration-1000 slide-image {% if forloop.first %}active{% endif %}"
-        style="background-image: url({{ block.settings.image | img_url: 'master' }});"
-        data-index="{{ forloop.index0 }}">
-      </div>
-    {% endfor %}
-  </div>
-
-  <!-- Overlay Gradient -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
-
-  <!-- Content -->
-  <div class="relative z-10 text-center max-w-5xl px-6">
-    {% for block in section.blocks %}
-      <div class="slide-content {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 uppercase tracking-wider">
-          <span class="block text-white">{{ block.settings.title }}</span>
-          <span class="block text-red-600 my-2">{{ block.settings.highlight }}</span>
-          <span class="block text-white">{{ block.settings.subtitle }}</span>
-        </h1>
-
-        <div class="flex justify-center items-center gap-8 mt-12">
-          <div class="text-center">
-            <div class="text-red-600 text-5xl font-bold">{{ block.settings.stat_number }}</div>
-            <div class="text-xs uppercase tracking-wider">
-              <div>{{ block.settings.stat_label_1 }}</div>
-              <div>{{ block.settings.stat_label_2 }}</div>
+      <div class="hero-slide{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
+        <div class="hero-slide-image-container">
+          {% if block.settings.image != blank %}
+            <img 
+              src="{{ block.settings.image | img_url: '2000x' }}" 
+              alt="{{ block.settings.title }}"
+              class="hero-slide-image"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            >
+          {% else %}
+            <div class="hero-slide-placeholder">
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
             </div>
-          </div>
+          {% endif %}
         </div>
-
-        <div class="mt-12">
-          <a href="/collections/all" class="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg rounded-md uppercase tracking-wider">
-            {{ block.settings.button_label }}
-          </a>
+        
+        <div class="hero-slide-content page-width">
+          <h2 class="hero-slide-title">
+            {{ block.settings.title | escape }}
+            {% if block.settings.highlight != blank %}
+              <span class="hero-slide-highlight">{{ block.settings.highlight | escape }}</span>
+            {% endif %}
+            {% if block.settings.subtitle != blank %}
+              <span class="hero-slide-subtitle">{{ block.settings.subtitle | escape }}</span>
+            {% endif %}
+          </h2>
+          
+          {% if block.settings.stat_number != blank and block.settings.stat_label != blank %}
+            <div class="hero-slide-stats">
+              <div class="hero-stat">
+                <div class="hero-stat-number">{{ block.settings.stat_number }}</div>
+                <div class="hero-stat-label">{{ block.settings.stat_label | newline_to_br }}</div>
+              </div>
+            </div>
+          {% endif %}
+          
+          {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+            <div class="hero-slide-button-wrapper">
+              <a href="{{ block.settings.button_link }}" class="button button-primary">
+                {{ block.settings.button_label | escape }}
+              </a>
+            </div>
+          {% endif %}
         </div>
       </div>
     {% endfor %}
   </div>
-
-  <!-- Slide Indicators -->
-  <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-2">
-    {% for block in section.blocks %}
-      <button class="w-3 h-3 rounded-full bg-gray-600 hover:bg-gray-400" data-index="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
-    {% endfor %}
-  </div>
-
-  <!-- Scroll Down -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-sm">
-    <div class="flex flex-col items-center">
-      <div class="text-xs uppercase mb-2 tracking-wider">Scroll Down</div>
-      <div class="relative w-16 h-16 rounded-full border-2 border-red-600 flex items-center justify-center">
-        <div class="absolute w-12 h-12 rounded-full bg-red-600 flex items-center justify-center animate-pulse">
-          {% render 'icon-chevron-down' %}
-        </div>
-      </div>
+  
+  <div class="hero-slider-controls">
+    <div class="hero-slider-dots">
+      {% for block in section.blocks %}
+        <button class="hero-slider-dot{% if forloop.first %} active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+      {% endfor %}
     </div>
   </div>
-</section>
+  
+  <div class="hero-scroll-indicator">
+    <span>Scroll Down</span>
+    <div class="hero-scroll-icon">
+      {% render 'icon-chevron-down' %}
+    </div>
+  </div>
+</div>
 
 {% schema %}
 {
   "name": "Hero Slider",
-  "settings": [],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 5
+    }
+  ],
   "blocks": [
     {
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "SHOW YOURSELF IN" },
-        { "type": "text", "id": "highlight", "label": "Highlight", "default": "FASHIONABLE" },
-        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "GYM ATTIRE" },
-        { "type": "image_picker", "id": "image", "label": "Slide Image" },
-        { "type": "text", "id": "stat_number", "label": "Stat Number", "default": "20" },
-        { "type": "text", "id": "stat_label_1", "label": "Stat Label Line 1", "default": "MODERN" },
-        { "type": "text", "id": "stat_label_2", "label": "Stat Label Line 2", "default": "EQUIPMENTS" },
-        { "type": "text", "id": "button_label", "label": "Button Label", "default": "SHOP NOW" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "SHOW YOURSELF IN",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "highlight",
+          "default": "FASHIONABLE",
+          "label": "Highlight text"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "default": "GYM ATTIRE",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "stat_number",
+          "label": "Statistic number",
+          "default": "20"
+        },
+        {
+          "type": "textarea",
+          "id": "stat_label",
+          "label": "Statistic label",
+          "default": "MODERN\nEQUIPMENTS"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "SHOP NOW",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
       ]
     }
   ],
-  "max_blocks": 5,
   "presets": [
     {
       "name": "Hero Slider",
       "blocks": [
-        { "type": "slide" },
-        { "type": "slide" }
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
       ]
     }
   ]
