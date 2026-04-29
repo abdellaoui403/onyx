@@ -1,101 +1,12 @@
 {
   "sections": {
-    "announcement_bar": {
-      "type": "announcement-bar",
-      "blocks": {
-        "text_1": {
-          "type": "_group-announcement-bar",
-          "settings": {
-             "padding_top": 10,
-             "padding_bottom": 10
-          },
-          "blocks": {
-            "msg": {
-              "type": "_announcement-text",
-              "settings": {
-                "text": "FREE SHIPPING ON ALL ORDERS OVER $99 • JOIN THE ELITE FITNESS CLUB",
-                "font_size": "1.4rem"
-              }
-            }
-          },
-          "block_order": ["msg"]
-        }
-      },
-      "block_order": ["text_1"],
-      "settings": {
-        "color_scheme": "scheme-2"
-      }
-    },
-    "slideshow": {
-      "type": "slideshow",
-      "blocks": {
-        "slide_1": {
-          "type": "_slide",
-          "settings": {
-            "image": "hero_gym_1.png",
-            "heading": "PUSH YOUR LIMITS",
-            "subheading": "Premium Performance Gear for the Modern Athlete",
-            "button_label": "SHOP NOW",
-            "button_link": "/collections/all"
-          }
-        }
-      },
-      "block_order": ["slide_1"],
-      "settings": {
-        "slideshow_type": "default",
-        "section_width": "full-width",
-        "slide_height": "large"
-      }
-    },
-    "categories": {
-      "type": "collection-list",
-      "blocks": {
-        "cat_1": {
-          "type": "group",
-          "settings": {
-            "background_media": "image",
-            "background_image": "category_men.png"
-          },
-          "blocks": {
-            "btn": {
-              "type": "text",
-              "settings": {
-                "text": "MEN'S FITNESS"
-              }
-            }
-          },
-          "block_order": ["btn"]
-        },
-        "cat_2": {
-          "type": "group",
-          "settings": {
-            "background_media": "image",
-            "background_image": "category_women.png"
-          },
-          "blocks": {
-            "btn": {
-              "type": "text",
-              "settings": {
-                "text": "WOMEN'S FITNESS"
-              }
-            }
-          },
-          "block_order": ["btn"]
-        }
-      },
-      "block_order": ["cat_1", "cat_2"],
-      "settings": {
-        "columns_grid": 2
-      }
-    },
     "featured_products": {
       "type": "featured-collection",
       "settings": {
         "collection": "all",
         "products_to_show": 4,
         "columns_desktop": 4,
-        "layout_type": "grid",
-        "color_scheme": "scheme-2"
+        "layout_type": "grid"
       }
     },
     "marquee": {
@@ -104,7 +15,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "JOIN THE ELITE FITNESS CLUB • GET 10% OFF YOUR FIRST ORDER • FREE SHIPPING OVER $99",
+            "text": "ELITE FITNESS CLUB IS NOW LIVE • SHOP THE NEW COLLECTION",
             "font_size": "2.4rem"
           }
         }
@@ -115,5 +26,5 @@
       }
     }
   },
-  "order": ["announcement_bar", "slideshow", "categories", "featured_products", "marquee"]
+  "order": ["featured_products", "marquee"]
 }
