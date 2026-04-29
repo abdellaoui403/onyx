@@ -6,7 +6,7 @@
         "s1": {
           "type": "_slide",
           "settings": {
-            "image": "hero_gym_1.png",
+            "image": "shopify://shop_images/hero_gym_1.png",
             "heading": "PUSH YOUR LIMITS",
             "subheading": "Premium Performance Gear",
             "button_label": "SHOP NOW",
@@ -37,7 +37,7 @@
           "type": "group",
           "settings": {
             "background_media": "image",
-            "background_image": "category_men.png",
+            "background_image": "shopify://shop_images/category_men.png",
             "horizontal_alignment": "center",
             "vertical_alignment": "center"
           }
@@ -46,7 +46,7 @@
           "type": "group",
           "settings": {
             "background_media": "image",
-            "background_image": "category_women.png",
+            "background_image": "shopify://shop_images/category_women.png",
             "horizontal_alignment": "center",
             "vertical_alignment": "center"
           }
@@ -55,7 +55,7 @@
           "type": "group",
           "settings": {
             "background_media": "image",
-            "background_image": "category_outlet.jpg",
+            "background_image": "shopify://shop_images/category_outlet.jpg",
             "horizontal_alignment": "center",
             "vertical_alignment": "center"
           }
