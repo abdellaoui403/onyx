@@ -50,11 +50,20 @@
             "horizontal_alignment": "center",
             "vertical_alignment": "center"
           }
+        },
+        "c3": {
+          "type": "group",
+          "settings": {
+            "background_media": "image",
+            "background_image": "category_outlet.jpg",
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center"
+          }
         }
       },
-      "block_order": ["c1", "c2"],
+      "block_order": ["c1", "c2", "c3"],
       "settings": {
-        "columns_grid": 2,
+        "columns_grid": 3,
         "section_width": "page-width",
         "gap": 20
       }
