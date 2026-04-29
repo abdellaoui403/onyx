@@ -6,10 +6,7 @@
         "s1": {
           "type": "_slide",
           "settings": {
-            "image": "hero_gym_1.png",
-            "heading": "PUSH YOUR LIMITS",
-            "subheading": "Premium Performance Gear",
-            "button_label": "SHOP NOW"
+            "heading": "PUSH YOUR LIMITS"
           }
         }
       },
@@ -18,39 +15,9 @@
     "welcome_message": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div style='text-align:center; padding: 80px 20px;'><h2 style='font-size: 40px;'>WELCOME TO ONYX FITNESS</h2><p style='font-size: 18px;'>The Gym Demo is now fully synced. Add your products and images to complete the look!</p></div>"
+        "custom_liquid": "<h2 style='text-align:center;'>WELCOME TO ONYX FITNESS</h2>"
       }
-    },
-    "categories_gym": {
-      "type": "collection-list",
-      "blocks": {
-        "c1": {
-          "type": "group",
-          "settings": {
-            "background_image": "category_men.png"
-          }
-        },
-        "c2": {
-          "type": "group",
-          "settings": {
-            "background_image": "category_women.png"
-          }
-        }
-      },
-      "block_order": ["c1", "c2"]
-    },
-    "marquee_gym": {
-      "type": "marquee",
-      "blocks": {
-        "t1": {
-          "type": "text",
-          "settings": {
-            "text": "JOIN THE ELITE FITNESS CLUB • FREE SHIPPING OVER $99"
-          }
-        }
-      },
-      "block_order": ["t1"]
     }
   },
-  "order": ["slideshow_gym", "welcome_message", "categories_gym", "marquee_gym"]
+  "order": ["slideshow_gym", "welcome_message"]
 }
