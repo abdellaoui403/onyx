@@ -83,7 +83,7 @@
         "t1": {
           "type": "text",
           "settings": {
-            "text": "JOIN THE ELITE FITNESS CLUB • GET 10% OFF YOUR FIRST ORDER • FREE SHIPPING OVER $99",
+            "text": "<p>JOIN THE ELITE FITNESS CLUB • GET 10% OFF YOUR FIRST ORDER • FREE SHIPPING OVER $99</p>",
             "font_size": "2.4rem"
           }
         }
