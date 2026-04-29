@@ -1,4 +1,35 @@
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_1": {
+          "type": "_slide",
+          "settings": {
+            "image": "hero_gym_1.png",
+            "heading": "PUSH YOUR LIMITS",
+            "subheading": "Premium Performance Gear for the Modern Athlete",
+            "button_label": "SHOP NOW",
+            "button_link": "/collections/all"
+          }
+        }
+      },
+      "block_order": ["slide_1"],
+      "settings": {
+        "slideshow_type": "default",
+        "section_width": "full-width",
+        "slide_height": "large"
+      }
+    },
+    "featured_products": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "layout_type": "grid"
+      }
+    }
+  },
+  "order": ["slideshow", "featured_products"]
 }
