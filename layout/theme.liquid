@@ -1,6 +1,20 @@
 <!doctype html>
 <html class="no-js{% if request.design_mode %} shopify-design-mode{% endif %}" lang="{{ request.locale.iso_code }}">
   <head>
+    <style>
+      #test-red-box {
+        background: #ff0000 !important;
+        color: #ffffff !important;
+        text-align: center;
+        padding: 20px;
+        font-weight: bold;
+        font-size: 20px;
+        position: relative;
+        z-index: 9999;
+        display: block !important;
+      }
+    </style>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -66,6 +80,10 @@
       {% if settings.enable_preloading_screen %} has--preload-screen{% endif %}
     "
   >
+    <div id="test-red-box">
+      TEST DETECTED: THEME IS SYNCING FROM GITHUB
+    </div>
+
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
 
     {%- if settings.enable_preloading_screen -%}
