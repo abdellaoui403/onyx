@@ -47,6 +47,30 @@
         "slide_height": "large"
       }
     },
+    "welcome_text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>WELCOME TO ONYX ELITE FITNESS</h2>",
+            "type_preset": "h2"
+          }
+        },
+        "content": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The layout is now fully synced from GitHub. You can see this text because the homepage is working! Now you just need to upload your images and create your products in Shopify.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "content"],
+      "settings": {
+        "horizontal_alignment_flex_direction_column": "center",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
+    },
     "categories": {
       "type": "collection-list",
       "blocks": {
@@ -121,5 +145,5 @@
       }
     }
   },
-  "order": ["announcement_bar", "slideshow", "categories", "featured_products", "marquee"]
+  "order": ["announcement_bar", "slideshow", "welcome_text", "categories", "featured_products", "marquee"]
 }
