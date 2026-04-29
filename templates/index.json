@@ -1,29 +1,11 @@
 {
   "sections": {
-    "welcome_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>WELCOME TO ONYX ELITE FITNESS</h2>",
-            "type_preset": "h2"
-          }
-        },
-        "content": {
-          "type": "text",
-          "settings": {
-            "text": "<p>IF YOU CAN SEE THIS, THE THEME IS WORKING! NOW WE CAN ADD THE SLIDESHOW BACK.</p>"
-          }
-        }
-      },
-      "block_order": ["heading", "content"],
+    "test_section": {
+      "type": "custom-liquid",
       "settings": {
-        "horizontal_alignment_flex_direction_column": "center",
-        "padding-block-start": 100,
-        "padding-block-end": 100
+        "custom_liquid": "<h1 style='text-align:center; padding: 100px; background: #C7F226;'>THEME SYNC TEST: SUCCESS</h1>"
       }
     }
   },
-  "order": ["welcome_text"]
+  "order": ["test_section"]
 }
