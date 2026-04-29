@@ -1,0 +1,170 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_1": {
+          "type": "_slide",
+          "settings": {
+            "image": "hero_gym_1.png",
+            "heading": "PUSH YOUR LIMITS",
+            "subheading": "Premium Performance Gear for the Modern Athlete",
+            "button_label": "SHOP NOW",
+            "button_link": "/collections/all"
+          }
+        },
+        "slide_2": {
+          "type": "_slide",
+          "settings": {
+            "image": "hero_gym_2.png",
+            "heading": "JOIN THE REVOLUTION",
+            "subheading": "Elite Fitness Apparel for Every Workout",
+            "button_label": "EXPLORE COLLECTIONS",
+            "button_link": "/collections/all"
+          }
+        }
+      },
+      "block_order": ["slide_1", "slide_2"],
+      "settings": {
+        "slideshow_type": "default",
+        "section_width": "full-width",
+        "slide_height": "large",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "categories": {
+      "type": "collection-list",
+      "blocks": {
+        "cat_1": {
+          "type": "group",
+          "settings": {
+            "background_media": "image",
+            "background_image": "category_men.png",
+            "link": "/collections/men"
+          },
+          "blocks": {
+            "btn": {
+              "type": "button",
+              "settings": {
+                "label": "MEN'S FITNESS",
+                "button_style": "default"
+              }
+            }
+          },
+          "block_order": ["btn"]
+        },
+        "cat_2": {
+          "type": "group",
+          "settings": {
+            "background_media": "image",
+            "background_image": "category_women.png",
+            "link": "/collections/women"
+          },
+          "blocks": {
+            "btn": {
+              "type": "button",
+              "settings": {
+                "label": "WOMEN'S FITNESS",
+                "button_style": "default"
+              }
+            }
+          },
+          "block_order": ["btn"]
+        },
+        "cat_3": {
+          "type": "group",
+          "settings": {
+            "background_media": "image",
+            "background_image": "category_accessories.png",
+            "link": "/collections/accessories"
+          },
+          "blocks": {
+            "btn": {
+              "type": "button",
+              "settings": {
+                "label": "ACCESSORIES",
+                "button_style": "default"
+              }
+            }
+          },
+          "block_order": ["btn"]
+        }
+      },
+      "block_order": ["cat_1", "cat_2", "cat_3"],
+      "settings": {
+        "section_width": "page-width",
+        "columns_grid": 3,
+        "gap": 30
+      }
+    },
+    "flex_section_fitness": {
+      "type": "section",
+      "blocks": {
+        "text_block": {
+          "type": "group",
+          "settings": {
+            "width": "25",
+            "vertical_alignment": "center"
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>TRAIN LIKE A PRO</h2>",
+                "type_preset": "h2"
+              }
+            },
+            "desc": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Experience the ultimate in comfort and durability with our latest fitness collection.</p>"
+              }
+            },
+            "btn": {
+              "type": "button",
+              "settings": {
+                "label": "VIEW ALL PRODUCTS",
+                "button_style": "link"
+              }
+            }
+          },
+          "block_order": ["heading", "desc", "btn"]
+        },
+        "product_grid": {
+          "type": "product-grid",
+          "settings": {
+            "width": "75",
+            "collection": "all",
+            "limit": 4,
+            "columns": 4
+          }
+        }
+      },
+      "block_order": ["text_block", "product_grid"],
+      "settings": {
+        "section_width": "page-width",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
+    },
+    "marquee_fitness": {
+      "type": "marquee",
+      "blocks": {
+        "m_text": {
+          "type": "text",
+          "settings": {
+            "text": "JOIN THE ELITE FITNESS CLUB • GET 10% OFF YOUR FIRST ORDER • FREE SHIPPING OVER $99 • JOIN THE ELITE FITNESS CLUB",
+            "font_size": "2.4rem",
+            "case": "uppercase"
+          }
+        }
+      },
+      "block_order": ["m_text"],
+      "settings": {
+        "speed": 30,
+        "color_scheme": "scheme-2"
+      }
+    }
+  },
+  "order": ["slideshow", "categories", "flex_section_fitness", "marquee_fitness"]
+}
