@@ -9,16 +9,25 @@
             "image": "hero_gym_1.png",
             "heading": "PUSH YOUR LIMITS",
             "subheading": "Premium Performance Gear",
-            "button_label": "SHOP NOW"
+            "button_label": "SHOP NOW",
+            "alignment": "center",
+            "heading_size": "h1"
           }
         }
       },
-      "block_order": ["s1"]
+      "block_order": ["s1"],
+      "settings": {
+        "slideshow_type": "default",
+        "section_width": "full-width",
+        "slide_height": "large",
+        "autoplay": false,
+        "navigation": "arrows"
+      }
     },
     "welcome_message": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div style='text-align:center; padding: 40px 20px;'><h2 style='font-size: 36px; margin-bottom: 10px;'>WELCOME TO ONYX FITNESS</h2><p style='font-size: 18px;'>Your elite fitness gear starts here.</p></div>"
+        "custom_liquid": "<div style='text-align:center; padding: 60px 20px;'><h2 style='font-size: 36px; margin-bottom: 10px; font-weight: 700;'>WELCOME TO ONYX FITNESS</h2><p style='font-size: 18px;'>Your elite fitness gear starts here. High-performance apparel for every athlete.</p></div>"
       }
     },
     "categories_gym": {
@@ -27,23 +36,36 @@
         "c1": {
           "type": "group",
           "settings": {
-            "background_image": "category_men.png"
+            "background_media": "image",
+            "background_image": "category_men.png",
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center"
           }
         },
         "c2": {
           "type": "group",
           "settings": {
-            "background_image": "category_women.png"
+            "background_media": "image",
+            "background_image": "category_women.png",
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center"
           }
         }
       },
-      "block_order": ["c1", "c2"]
+      "block_order": ["c1", "c2"],
+      "settings": {
+        "columns_grid": 2,
+        "section_width": "page-width",
+        "gap": 20
+      }
     },
     "featured_products": {
       "type": "featured-collection",
       "settings": {
         "collection": "all",
-        "products_to_show": 4
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "layout_type": "grid"
       }
     },
     "marquee_gym": {
@@ -52,11 +74,15 @@
         "t1": {
           "type": "text",
           "settings": {
-            "text": "JOIN THE ELITE FITNESS CLUB • FREE SHIPPING OVER $99"
+            "text": "JOIN THE ELITE FITNESS CLUB • GET 10% OFF YOUR FIRST ORDER • FREE SHIPPING OVER $99",
+            "font_size": "2.4rem"
           }
         }
       },
-      "block_order": ["t1"]
+      "block_order": ["t1"],
+      "settings": {
+        "speed": 30
+      }
     }
   },
   "order": ["slideshow_gym", "welcome_message", "categories_gym", "featured_products", "marquee_gym"]
